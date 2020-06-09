@@ -63,6 +63,12 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 
 The preprocessing step included grayscaling the image and normalizing image. Used shuffle to randomize the data.
 
+Grayscaling is used due to performance issue. Having a color image will add 3 times more data because there are 3 channels. By using grayscale, it reduces the number of parameters used to train on and does not sacrifice the model accuracy by too much. 
+
+Normalizing the data helps to learn the data faster and it will help with convergence during gradient descent. 
+
+By doing randomization, it eliminates the chance of feeding the data in order. Such as feeding all the stop sign data all once will cause it to overfit instead of generalizing the data. 
+
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
@@ -107,7 +113,10 @@ Here are five German traffic signs that I found on the web:
 ![alt text][image4] ![alt text][image5] ![alt text][image6] 
 ![alt text][image7] ![alt text][image8]
 
-The first 2 images are difficult to classify because stop sign and speed limit look very similar. 
+
+It would be hard predict Stop sign image because of the brigtness. There are alot images of stop sign during the night. Even the brightest pics of the stop sign are not as bright as the test image. 
+All images have higher resolution and image size compare to the train image which would make it harder to infer. 
+
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -115,11 +124,11 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| 80 Speed Limit   									| 
-| 60 Speed Limit        | 50 Speed Limit										|
+| Stop Sign      		| Stop Sign   									| 
+| 60 Speed Limit        | 30 Speed Limit										|
 | Road Work				| Road Work									|
 | Keep Left	      		| Keep Left					 				|
-| Slippery Road			| Slippery Road      							|
+| Slippery Road			| Keep Right     							|
 
 
 The model was able to correctly guess 3 of the 5 traffic signs, which gives an accuracy of 60%. 
@@ -127,15 +136,15 @@ The model was able to correctly guess 3 of the 5 traffic signs, which gives an a
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 6.911174e-23), and the image does contain a stop sign. The top five soft max probabilities were
+For the first image, the model is relatively sure that this is a stop sign (probability of 1.0), and the image does contain a stop sign. The top five soft max probabilities were
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| 1.0         			| 80 Speed Limit   									| 
-| 5.179114e-08    				| No entry										|
-| 2.4982677e-12					| Yield											|
-| 2.3481015e-15	      			| 60 Speed Limit					 				|
-| 6.911174e-23 				    | Stop      							|
+| 1.0         			| Stop Sign 									| 
+| 0.0    				| 20 Speed Limit										|
+| 0.0					| 30 Speed Limit											|
+| 0.0	      			| 50 Speed Limit					 				|
+| 0.0				    | 60 Speed Limit      							|
 
 
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
